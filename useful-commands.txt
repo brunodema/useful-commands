@@ -1,0 +1,289 @@
+Useful Commands
+	Networking
+		Transmission
+			netcat -l <port>
+				netcat <address> <port>
+			telnet <address> <port>
+		DNS
+			Search
+				whois <address>
+				dig <address>
+				nslookup <address>
+					nslookup <address> <source-DNS>
+				host <address>
+			Configuration
+				ipconfig /flushdns
+			Information
+				ip route
+				hostname
+				getmac
+		IP
+			ipconfig /release
+			ipconfig /renew
+			ip address
+				ip address add <new-ip-address> dev <device-name>
+				ip address change <new-ip-address> dev <device-name>
+				ip address replace <new-ip-address> dev <device-name>
+			hostname -I
+		Interfaces
+			ipconfig /all
+			ncpa.cpl
+			ifconfig
+			ethtool <interface>
+				ethtool -S <interface>
+		Ports
+			netstat -an
+			ss -t -a
+		Ping
+			ping <address>
+			pathping <address>
+			fping -r 0 -ag <address-with-mask> 2>/dev/null
+		Routing
+			tracert <address>
+			traceroute -I <address>
+			mtr <hostname>
+				mtr -I <interface> <hostname>
+				mtr -P <port> <hostname>
+		Mapping
+			nmap <address>
+			nmap -sn <address>
+			nmap -O <address>
+			arp -a
+		Bandwidth
+			iperf -s
+				iperf -c <address>
+		Sniffing
+			tcpdump -i <interface> -c <number-limit> <protocol>
+	Filesystem
+		Search
+			Get-ChildItem -Recurse <name>
+			locate -i <name>
+		Network Drive
+			net use
+			net use <partition> <addresss> /user:<username> <password>
+			net use /D <partition>
+		Navigation
+			cd
+				cd <path>
+				cd ..
+				cd /
+				cd $env:<var-name>
+			Folder
+				Information
+					ls <path>
+					pwd
+				Creation
+					mkdir <dir-name>
+		File
+			Compressed Formats
+				Expand-Archive <compacted-file> <target-folder>
+			Information
+				stat <file>
+				file <file>
+				Get-ChildItem -Include <filename-filter> -Recurse | Get-Content | Measure-Object -Line
+			Environment
+				Information
+					System
+						lsb_release -a
+						systeminfo
+						uname
+					User
+						w
+						whoami
+						su <username>
+					History
+						last
+						history
+						CTRL + R
+				Variables
+					Read
+						env
+						$env:<env-var>
+						Get-ChildItem "Env:"
+					Write
+						export <env-var> = <value>
+							export PATH="your-dir:$PATH"
+						$env:<env-var> = <value>
+							$ENV:PATH += ";<path>"
+			Read/Write
+				Rename-Item <current-name> <new-name>
+				Contents
+					Get-Content -Path <path> -Wait
+					tail -f <file>
+					less <file>
+					vim <file>
+					nano <file>
+					cat <file>
+				touch <filename>
+				chmod +x <file>
+	Processes
+		Information
+			htop
+			ps
+			taskmgr
+			perfmon /res
+		Start
+			<process-name> <argument-list>
+			Start-Process <process-name> -Arguments <arguments> -Wait -NoNewWindow
+		Background
+			Start-Job {<process-name>}
+				Get-Job <job-ID>
+				Stop-Job <job-ID>
+				Resume-Job <job-ID>
+			<process-name> <argument-list> &
+		Internals
+			strace
+				strace <process-name> <argument-list>
+				strace -p <PID>
+				strace -c [<process-name>| -p <PID>]
+			ltrace
+				ltrace <process-name> <argument-list>
+				ltrace -p <PID>
+				ltrace -c [<process-name>| -p <PID>]
+			<process-name> <argument-list> &
+		Stop
+			kill <PID>
+	Windows Update
+		Install-Module PSWindowsUpdate
+			Get-WindowsUpdate
+			Install-WindowsUpdate
+		Information
+			Get-Hotfix
+			systeminfo
+			Get-WindowsUpdateLog
+	Services
+		Start/Stop
+			net start <service>
+			net stop <service>
+		Information
+			net start
+		Configuration
+			sc config <service> start=<mode>
+	Web
+		Request
+			Invoke-WebRequest <address>
+				Invoke-WebRequest <address> -Method GET -UseBasicParsing
+				Invoke-WebRequest -Output <file> <address>
+			curl <address>
+				curl --insecure -I <address>
+				curl -o <file> <address>
+		SSL
+			openssl s_client -connect <address>:<port> -CAfile <certificate-path>
+	Active Directory
+		Domain
+			Get-ADDomain
+			Get-ADDefaultDomainPasswordPolicy
+		User
+			Get-ADUser -Filter <filter>
+				Get-ADUser -Filter <filter> -Properties <filter> | Select name, department, title | export-csv <output-file>
+			Get-ADUser -SearchBase <base-path> -Filter <filter>
+		Group
+			Get-ADGroupMember -Identity <group-name>
+		LDAP
+			ldapsearch -x -b <base-path> -D <user-path> -H <bind-address> -W
+	Certificates
+		Create
+			openssl req -x509 rsa:4096 -keyout <output-key-file> -out <output-certificate-file> -days <time-period> -subj <certificate-object>
+				openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -subj "/C=US/ST=Oregon/L=Portland/O=Company Name/OU=Org/CN=www.example.com"
+			New-SelfSignedCertificate -DnsName <domain-names> -KeyUsage <certificate-roles> -KeyAlgorithm <algorithm> -KeyLength <key-length> -CertStoreLocation <target-certificate-store>
+				New-SelfSignedCertificate -DnsName "www.fabrikam.com","www.contoso.com" -KeyUsage DigitalSignature -KeyAlgorithm RSA -KeyLength 2048 -CertStoreLocation "cert:\LocalMachine\My"
+		Import
+			cp <certificate-file> "/usr/local/share/ca-certificates" && update-ca-certificates
+				
+			Import-PfxCertificate -FilePath <path> -CertStoreLocation <windows-certificate-store> -Password <formatted-password>
+			Import-Certificate -FilePath <path> -CertStoreLocation <windows-certificate-store>
+	Build Essentials
+		make
+			make clean
+			make <target>
+		cmake
+			cmake <source-dir> -B <build-dir> -DCMAKE_BUILD_TYPE=<build-type
+			cmake --build <build-dir> --target <target> --config <build-type>
+		Debug
+			 gdb
+				gdb "example.exe"
+					gdb run
+					gdb continue
+					gdb watch <var-name>
+					gdb step
+					gdb next
+					print <var-name>
+					gdb break
+						gdb break <function-name>
+							gdb break <function-name> <condition>
+								gdb break "my_func" if i >= ARRAYSIZE
+						gdb break <file>:<line-number>
+		Formatting
+			clang-format
+				find <path> -regex <regex-filter> -exec clang-format style=file -i {} \;
+					find . -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format -style=file -i {} \;
+					find . -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format --dry-run -Werror {} \;
+			cmake-format
+				cmake-format -i <file>
+				find <path> -name <name-filter> -exec cmake-format -i {} \;
+					find . \( -name '*.cmake' -o -name 'CMakeLists.txt' \) -exec cmake-format -i {} \;
+		Code Analyzer
+			clang-tidy
+				run-clang-tidy <source-dir> -p <compilation-database-path> -fix
+				run-clang-tidy <source-dir> -checks='-*,<clang-tidy-check>' -p <compilation-database-path> -fix
+			valgrind
+				valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=<file> --executable <executable-name>
+	Package Manager
+		apt
+			apt install <package-list>
+			apt uninstall <package-list>
+			apt update
+			apt upgrade
+			apt search <package-name>
+			apt list
+				apt list --installed
+		chocolatey
+			Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+			choco install <package-list>
+			choco uninstall <package-list>
+			choco search <package-name>
+			choco list
+				choco list --local-only
+	Versioning
+		git
+			git pull <repository> <branch>
+			git remote
+				git remote add <repository> <address>
+				git remote remove <repository>
+			git push <repository> <branch>
+			git checkout
+				git checkout -b <new-branch-name>
+				git checkout <branch>
+				git checkout <commit-hash>
+			git reset --hard
+			git clean -xdf
+			git commit -m <message>
+			git rm <path>
+			git add <path>
+			git rm
+				git rm --cached
+			git clone <address>
+			git init
+			git log
+				git log --stat
+			git fetch
+				git fetch --all
+			git diff
+				git diff --cached
+			git tag -m <message> <tag-name>
+		svn
+			svn checkout <address>
+			svn add <path>
+			svn status
+			svn log
+			svn export <address>
+			svn commit -m <message>
+	Firewall
+		wf.msc
+
+Legend
+	Linux command (Ubuntu)
+	Windows Command (Powershell)
+	Cross-platform command
+	Shortcut
+ (opens interactive mode or UI)
