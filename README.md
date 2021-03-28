@@ -6,18 +6,18 @@
 [Bruno Demantova]: https://github.com/brunodema
 [Marcos Lessa]:
 
-# useful-commands
+# [useful-commands](https://gitmind.com/app/doc/c9d1960991)
 A mind-map containing a collection of useful command-line interface commands that I use on my daily routine.
 
 # Summary
 
 ## TL:DR
 
-The view-only version of the mind-map, which is hosted on GitMind, can be accessed through this [link](https://gitmind.com/app/doc/c9d1960991).
+The view-only version of the mind-map, which is hosted on GitMind, can be accessed through this [link](https://gitmind.com/app/doc/c9d1960991). Please prefer this version of the others, since this is will have the best rendering possible (directly on GitMind).
 
-The pdf version, which is available on this repository, is available [here]().
+The pdf version, which is available on this repository, is available [here](useful-commands.pdf).
 
-The png version, which is also available on this repository, is available [here]().
+The png version, which is also available on this repository, is available [here](useful-commands.png).
 
 The GitMind version (internals), and a text version of it (it is quite readable, in fact), are also available on this repository.
 
