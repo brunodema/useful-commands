@@ -38,7 +38,7 @@ For any contributions or feedback, feel free to contact [me](brunoeckdema@gmail.
   * Versioning: usage of popular code versioning/hosting platforms.
   * Build-essentials: nomenclature taken from the associated Ubuntu `apt` package, contains commands related to programming in general, like compilation, debugging, and other utilities.
   * Package manager: commands used by popular package managers.
-  * Web: functionalities associated with web requests and general HTTP/HTTPS comunication.
+  * Web: functionalities associated with web requests and general HTTP/HTTPS communication.
   * Certificates: security certificates' creation and manipulation.
   * Services: information and managing functions for common system services.
   * Windows Update: commands associated with Windows Update, like installing new updates or checking already installed ones.
@@ -46,7 +46,7 @@ For any contributions or feedback, feel free to contact [me](brunoeckdema@gmail.
 
 ### Future
 
-* Maybe add some documentation for each branch, like references for further reading? I though about adding specfic documentation for each command (like the output of `--help` flags), but that obviously would lead to maintance problems.
+* Maybe add some documentation for each branch, like references for further reading? I though about adding specific documentation for each command (like the output of `--help` flags), but that obviously would lead to maintance problems.
 
 ## Mind mapping
 
@@ -58,15 +58,15 @@ I am very skeptical of "miraculous" methods or frameworks, since sometimes they 
 
 ## GitMind
 
-[GitMind] is an open-source web platform for mind-mapping and flowcharting in general. Considering its features, and how ease it is to kick things off, I consider this the best open-source tool for mind-mapping available. This mind-map is stored on the GitMind's cloud, where I have the rigths to edit it. 
+[GitMind] is an open-source web platform for mind-mapping and flowcharting in general. Considering its features, and how ease it is to kick things off, I consider this the best open-source tool for mind-mapping available. This mind-map is stored on the GitMind's cloud, where I have the rights to edit it. 
 
-For security reasons, I can not share editting rights with others, since I do not have the means to back up previous versions of the map, in case of cathastrophic failures. **This is why I ask for anyone who wants to collabote with it, to contact me with the proposed changes, so I can apply them myself to the map. Appropriate credits will be given to the contribution's author, which I will pin at the [bottom](#Contributors) of this README section.**
+For security reasons, I can not share editing rights with others, since I do not have the means to back up previous versions of the map, in case of catastrophic failures. **This is why I ask for anyone who wants to collaborate with it, to contact me with the proposed changes, so I can apply them myself to the map. Appropriate credits will be given to the contribution's author, which I will pin at the [bottom](#Contributors) of this README section.**
 
 ## The mind-map itself
 
 This mind-map was elaborated considering a developer's daily routine - specifically, mine. Since I usually mess with the C's and its associated tools (normal, #, and ++), and also a bit with system configuration, the initial version contains mostly commands associated with these aspects. This is why I actively ask for contributions: I do not master all aspects of system administration to know all the usual commands and sintaxes for them.
 
-For sanity reasons, I categorized the commands into three labels: Windows, Linux, and cross-platform (cross-command-line?). Since Powershell supersedes the command-prompt in many ways (not always though), I have chosen to adopt it as the default inteface for Windows platforms. The fact that Powershell is marching towards cross-platform usage also helps. For Linux, I have chosen my favorite distribution to test and document the commands: Ubuntu. There are a plethora of distros availables, and all of them have their unique quirks. If necessary, I will adapt the mind-map to discriminate between specific distros. However, I believe that this is not a main issue, nor something that should be a main aspect of this initiative. 
+For sanity reasons, I categorized the commands into three labels: Windows, Linux, and cross-platform (cross-command-line?). Since Powershell supersedes the command-prompt in many ways (not always though), I have chosen to adopt it as the default interface for Windows platforms. The fact that Powershell is marching towards cross-platform usage also helps. For Linux, I have chosen my favorite distribution to test and document the commands: Ubuntu. There are a plethora of distros available, and all of them have their unique quirks. If necessary, I will adapt the mind-map to discriminate between specific distros. However, I believe that this is not a main issue, nor something that should be a main aspect of this initiative. 
 
 # Contributing
 
@@ -92,5 +92,5 @@ The section below was taken from my personal profile description. Please keep it
 
 # About Me
 
-Even though I have been messing with coding in general since I was 15, my first actual experiences with programming were between 2011 - 2017, while I was graduating in Chemical Engineering. Most of these experiences were related to engineering tools like [Aspen Plus], [COMSOL], [Matlab], Fortran, VBA and C++. In 2018, I started working with Operations Reasearch, focusing on mathematical models designed for the optimization of integrated logistic systems. Most of my work in this area is related to algorithm development using CLI C/C++ apps. During this period, I also worked as a full-stack developer in a [Outsystems] based project. More recently, I started working as a software developer, where I deal on a daily basis with C# development (.NET Framework, .NET Core), C/C++ (Win32), CMake, SQL, network management, and so many other recurring tools in the world of development. I also have a pet project called [FlashMEMO], which is a learning platform based on Flashcards and the [Spaced Repetition] memorization method. All these personal projects have the goal of extending my knowledge of programming tools, and also to learn and apply the most recent architecture and coding guidelines.   
+Even though I have been messing with coding in general since I was 15, my first actual experiences with programming were between 2011 - 2017, while I was graduating in Chemical Engineering. Most of these experiences were related to engineering tools like [Aspen Plus], [COMSOL], [Matlab], Fortran, VBA and C++. In 2018, I started working with Operations Research, focusing on mathematical models designed for the optimization of integrated logistic systems. Most of my work in this area is related to algorithm development using CLI C/C++ apps. During this period, I also worked as a full-stack developer in a [Outsystems] based project. More recently, I started working as a software developer, where I deal on a daily basis with C# development (.NET Framework, .NET Core), C/C++ (Win32), CMake, SQL, network management, and so many other recurring tools in the world of development. I also have a pet project called [FlashMEMO], which is a learning platform based on Flashcards and the [Spaced Repetition] memorization method. All these personal projects have the goal of extending my knowledge of programming tools, and also to learn and apply the most recent architecture and coding guidelines.   
 
