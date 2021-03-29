@@ -19,7 +19,7 @@ The PDF, PNG, GitMind (internals), and text versions of it (it is quite readable
 
 As soon as GitHub implements embedded PDF rendering, or improved tools for rendering large pictures (otherwise it will not be feasible for someone to see the entire mind-map), I will make sure to update the README to automatically show the document(s). 
 
-For any contributions or feedback, feel free to contact [me](brunoeckdema@gmail.com) (see [Contributing](#Contributing)).
+For any contributions or feedback, feel free to contact [me](mailto:brunoeckdema@gmail.com) (see [Contributing](#Contributing)).
 
 ## Features
 
