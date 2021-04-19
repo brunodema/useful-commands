@@ -4,7 +4,6 @@
 [Kam Knight]: https://www.amazon.com.br/Kam-Knight/e/B00M5OO8TS/ref=dp_byline_cont_pop_ebooks_1
 [GitMind]: https://gitmind.com/
 [Bruno Demantova]: https://github.com/brunodema
-[Marcos Lessa]:
 
 # [useful-commands](https://gitmind.com/app/doc/c9d1960991)
 A mind-map containing a collection of useful command-line interface commands that I use on my daily routine.
@@ -73,7 +72,7 @@ This project, just as pretty much all of my other projects, have the base princi
 # Contributors
 
 * Me, [Bruno Demantova].
-* [Marcos Lessa]
+* Maybe you? (:
 
 <!---
 The section below was taken from my personal profile description. Please keep it updated throughout all public repos.
