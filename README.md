@@ -4,7 +4,6 @@
 [Kam Knight]: https://www.amazon.com.br/Kam-Knight/e/B00M5OO8TS/ref=dp_byline_cont_pop_ebooks_1
 [GitMind]: https://gitmind.com/
 [Bruno Demantova]: https://github.com/brunodema
-[Marcos Lessa]:
 
 # [useful-commands](https://gitmind.com/app/doc/c9d1960991)
 A mind-map containing a collection of useful command-line interface commands that I use on my daily routine.
@@ -19,7 +18,7 @@ The PDF, PNG, GitMind (internals), and text versions of it (it is quite readable
 
 As soon as GitHub implements embedded PDF rendering, or improved tools for rendering large pictures (otherwise it will not be feasible for someone to see the entire mind-map), I will make sure to update the README to automatically show the document(s). 
 
-For any contributions or feedback, feel free to contact [me](brunoeckdema@gmail.com) (see [Contributing](#Contributing)).
+For any contributions or feedback, feel free to contact [me](mailto:brunoeckdema@gmail.com) (see [Contributing](#Contributing)).
 
 ## Features
 
@@ -73,7 +72,7 @@ This project, just as pretty much all of my other projects, have the base princi
 # Contributors
 
 * Me, [Bruno Demantova].
-* [Marcos Lessa]
+* Maybe you? (:
 
 <!---
 The section below was taken from my personal profile description. Please keep it updated throughout all public repos.
