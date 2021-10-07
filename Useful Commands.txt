@@ -1,0 +1,524 @@
+Useful Commands
+	Command Line
+		Command Chaining
+			Sequential
+				<command1>; <command2>; <command3>
+			On Success
+				<command1> && <command2>
+			On Fail
+				<command1> || <command2>
+		Piping
+			Append
+				<command1> >> <destination>
+					echo "text to append" >> "already_existing_file.txt"
+			Write
+				<command1> > <destination>
+					echo "content of new file" > "new_file.txt"
+				envsubst < "<source-file>" > "<destination-file>"
+			nohup <command>
+			<command> &
+		History
+			history
+			CTRL + R
+		General
+			alias <alias-name>="<command>"
+			sudo -i
+			source <file>
+			watch -n <interval-in-seconds> <command>
+	Active Directory
+		Domain
+			Get-ADDomain
+			Get-ADDefaultDomainPasswordPolicy
+		User
+			Get-ADUser -Filter <filter>
+				Get-ADUser -Filter <filter> -Properties <filter> | Select name, department, title | export-csv <output-file>
+			Get-ADUser -SearchBase <base-path> -Filter <filter>
+			New-ADUser -Name <name> -Surname <surname> -AccountPassword(Read-Host -AsSecureString <password>) -PassThru | Enable-ADAccount
+		Group
+			Get-ADGroupMember -Identity <group-name>
+			ADD-ADGroupMember -Identity <group-name> -Members <member-list>
+		LDAP
+			ldapsearch -x -b <base-path> -D <user-path> -H <bind-address> -W
+		dsa.msc
+		ldp.exe
+		Scripting
+			ldifde -f <file>
+			ldifde -i -f <file>
+	Containerization
+		docker
+			Image
+				docker tag <image-name> <tag-name>
+				docker pull <image-URL>
+				docker push <image-name>:<tag-name>
+				docker build <dockerfile-path> -t <tag-name>
+				docker rmi <image-name1>:<image-tag1> <image-name2>:<image-tag2>
+			Container
+				docker run -tdi --name <container-name> --network=<network-name> <image-name>
+				docker run -ti <image-name>
+				docker run -d -p <host-port>:<container-port> <image-name>
+				docker kill <container-name>
+				docker start <container-name>
+				docker rm -f <container-name>
+				docker attach <container-name>
+				docker remame <container-name> <new-name>
+				docker inspect <container-ID>
+					docker inspect <container-ID> | findstr IPAddress
+					docker inspect <container-ID> | grep IPAddress
+				docker logs <container-ID>
+			Information
+				docker container ls
+				docker image ls
+				docker version
+				docker history <image-name>
+				docker logs <container-name>
+				docker ps
+				docker system df
+			docker builder prune -f
+			docker system prune --volumes -f
+		docker-compose
+			docker-compose build
+			docker-compose -f <file> up -d --build
+	Kubernetes
+		kubectl
+			kubectl get <pods|services|namespaces>
+			kubectl describe <pods|services|namespaces>
+			kubectl delete all -l <label-selector-expession>
+			kubectl get all -A
+			kubectl <create | delete> namespace <namespace-name>
+			kubectl port-forward <service | pods | deployment> -n <namespace-name> <host-port>:<remote-port> 
+			kubectl auth can-i update <resource> --as=<account-name>-n <namespace-name>
+			kubectl create clusterrolebinding <clusterrolebinding-name> --serviceaccount=<serviceaccoutn-name> --clusterrole=<clusterrole-name>
+			kubectl -n kube-system create secret tls mkcert --key <key-filename>.pem --cert <cert-filename>.pem
+			kubectl logs <pod-name | service-name> -f
+				kubectl logs <pod-name> -c <container-name>
+			kubectl exec -ti <pod-name> -c <container-name> -- <command>
+		minikube
+			minikube start
+			minikube delete --all
+			minikube addons list
+			minikube addons enable <addon-name>
+			minikube addons disable <addon-name>
+		helm
+			helm repo add <repo-name> <repo-url>
+			helm repo update
+			helm search repo <repo-name> 
+			helm get -h
+			helm install -f <values-file> -n <namespace-name> <release-name> <chart-folder | chart-url>
+			helm uninstall <release-name>
+			helm show chart <chart-name>
+			helm list
+			helm search hub <keyword>
+			helm show values <release-name>
+			helm pull <chart-url | repo/chart-name> --untar
+	AWS
+		aws sts get-caller-identity --output text --query Account
+		aws configure set default.region ${AWS_REGION}
+		aws configure get default.region
+		aws ec2 import-key-pair --key-name "mythicaleks" --public-key-material file://~/.ssh/id_rsa.pub
+		aws ec2 import-key-pair --key-name "mythicaleks" --public-key-material fileb://~/.ssh/id_rsa.pub
+		aws dynamodb list-tables | jq -r .TableNames[0]
+		aws ecr describe-repositories
+		aws iam list-policies --query 'Policies[?PolicyName==`MythicalMisfitDynamoDBTablePolicy`].Arn' --output text
+		aws iam create-policy --policy-name MythicalMisfitDynamoDBTablePolicy --policy-document file://iam-dynamodb-policy.json
+		aws eks create-cluster --name prod \
+--role-arn arn:aws:iam::012345678910:role/eks-service-role-AWSServiceRoleForAmazonEKS-J7ONKE3BQ4PI \
+--resources-vpc-config subnetIds=subnet-6782e71e,subnet-e7e761ac,securityGroupIds=sg-6979fe18
+	Environment
+		Information
+			System
+				lsb_release -a
+				systeminfo
+				uname
+				free -h
+			User
+				w
+				whoami
+				su <username>
+				last
+				sudo -i -u <target-user>
+			Events
+				Get-EventLog -List
+				Get-EventLog -LogName <log-name> -ComputerName <host-name> -Newest <entry-limit> -EntryType <entry-type> -Source <source-name> 
+			Locale
+				Get-WinSytemLocale
+				Set-WinSytemLocale <locale-code>
+		Variables
+			Read
+				env
+				$env:<env-var>
+				Get-ChildItem "Env:"
+			Write
+				export <env-var> = <value>
+					export PATH="<path>:$PATH"
+				$env:<env-var> = <value>
+					$ENV:PATH += ";<path>"
+	Services
+		Start/Stop
+			net start <service>
+			net stop <service>
+			service <service-name> start
+			service <service-name> stop
+			service <service-name> restart
+		Information
+			net start
+			service --status-all
+			service <service-name> status
+		Configuration
+			sc config <service> start=<mode>
+	System Update
+		Windows Update
+			Install-Module PSWindowsUpdate
+				Get-WindowsUpdate
+				Install-WindowsUpdate
+			Information
+				Get-Hotfix
+				systeminfo
+				Get-WindowsUpdateLog
+		apt dist-upgrade
+	Filesystem
+		Physical Drive
+			Repair
+				sfc /scannow
+				sfc /verifyonly
+			Information
+				du -sh
+				df -h
+				iotop
+				Get-PSdrive
+		Network Drive
+			net use
+			net use <partition> <addresss> /user:<username> <password>
+			net use /D <partition>
+		Navigation
+			cd
+				cd <path>
+				cd ..
+				cd /
+				cd $env:<var-name>
+		Folder/File
+			Compressed Formats
+				Expand-Archive <compacted-file> <target-folder>
+			Information
+				stat <file>
+				file <file>
+				pwd
+				ls <path>
+			Read/Write
+				Rename-Item <current-name> <new-name>
+				Contents
+					View
+						less <file>
+						cat <file>
+						less <file>
+					Editor
+						vim <file>
+						nano <file>
+						notepad <file>
+					Tail
+						Get-Content -Path <path> -Wait
+						tail -f <file>
+				touch <filename>
+				chmod +x <file>
+				mkdir <dir-name>
+				mv <source-path> <target-path>
+				rm <path>
+					rm -rf <path>
+					rm -Force -Recurse <path>
+			Permissions
+				chmod
+					chmod u=<flags>,g=<flags>,o=<flags> <file>
+						chmod u=rw,g=r,o= text.txt
+					chmod <value> <file>
+						chmod 640 text.txt
+					chmod <operator><flag> <file>
+						chmod +x script.sh
+				chown <user>:<group> <file>
+					chown sysadmin:admin text.txt
+			Compare
+				diff -qrs <folder1> <folder2>
+			Search
+				Get-ChildItem -Include <filename-filter> -Recurse | Get-Content | Measure-Object -Line
+				find -iname <folder-or-file-name>
+	Processes
+		Information
+			top
+				htop
+			ps
+				ps aux
+			taskmgr
+			perfmon /res
+		Start
+			<process-name> <argument-list>
+			Start-Process <process-name> -Arguments <arguments> -Wait -NoNewWindow
+		Background
+			Start-Job {<process-name>}
+				Get-Job
+					Get-Job <job-ID>
+				Stop-Job <job-ID>
+				Resume-Job <job-ID>
+			<process-name> <argument-list> &
+		Internals
+			strace
+				strace <process-name> <argument-list>
+				strace -p <PID>
+				strace -c [<process-name>| -p <PID>]
+			ltrace
+				ltrace <process-name> <argument-list>
+				ltrace -p <PID>
+				ltrace -c [<process-name>| -p <PID>]
+			<process-name> <argument-list> &
+		Stop
+			kill <PID>
+	Web
+		Request
+			Invoke-WebRequest <address>
+				Invoke-WebRequest <address> -Method GET -UseBasicParsing
+				Invoke-WebRequest -Output <file> <address>
+			curl <address>
+				curl --insecure -I <address>
+				curl -o <file> <address>
+				curl -Lkv -H <custom-header> <address>
+		SSL
+			openssl s_client -connect <address>:<port> -CAfile <certificate-path>
+	SMTP
+		Send-MailMessage -To <recipient-address> -Subject <subject> -Body <body> -From <sender-address> -SmtpServer <server-address>
+		telnet 
+ <SMTP-server-address>
+﻿25
+	Ssecurity
+		Firewall
+			wf.msc
+			Rules
+				New-NetFirewallRule -Name <name> -DisplayName <descriptive-name> -Enabled <true|false> -Direction <Inbound|Outbound> -Protocol <protocol> -Action <action> -LocalPort <port>
+		Certificates
+			Create
+				openssl req -x509 rsa:4096 -keyout <output-key-file> -out <output-certificate-file> -days <time-period> -subj <certificate-object>
+					openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -subj "/C=US/ST=Oregon/L=Portland/O=Company Name/OU=Org/CN=www.example.com"
+				New-SelfSignedCertificate -DnsName <domain-names> -KeyUsage <certificate-roles> -KeyAlgorithm <algorithm> -KeyLength <key-length> -CertStoreLocation <target-certificate-store>
+					New-SelfSignedCertificate -DnsName "www.fabrikam.com","www.contoso.com" -KeyUsage DigitalSignature -KeyAlgorithm RSA -KeyLength 2048 -CertStoreLocation "cert:\LocalMachine\My"
+				mkcert -key-file <output-key-filename>.pem -cert-file <output-cert-filename>.pem <domain-name-list>
+					mkcert -key-file key.pem -cert-file cert.pem example.com *.example.com
+			Import
+				cp <certificate-file> "/usr/local/share/ca-certificates" && update-ca-certificates
+				Import-PfxCertificate -FilePath <path> -CertStoreLocation <windows-certificate-store> -Password <formatted-password>
+				Import-Certificate -FilePath <path> -CertStoreLocation <windows-certificate-store>
+		SSH
+			ssh-keygen -t <algorithm> -C <comment> -N <new-password> -f <output-file>
+				ssh-keygen -t ed25519 -C <comment> -N <new-password> -f <output-file>
+			echo "Host *
+ IgnoreUnknown UseKeychain
+ AddKeysToAgent yes
+ UseKeychain yes
+ IdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
+			ssh-add -K ~/.ssh/id_ed25519
+	Networking
+		Sniffing
+			tcpdump -i <interface> -c <number-limit> <protocol>
+		Bandwidth
+			iperf -s
+				iperf -c <address>
+		Mapping
+			nmap <address>
+			nmap -sn <address>
+			nmap -O <address>
+		Routing
+			tracert <address>
+			traceroute -I <address>
+			mtr
+				mtr <hostname>
+				mtr -I <interface> <hostname>
+				mtr -P <port> <hostname>
+		Ping
+			ping <address>
+			pathping <address>
+			Test-NetConnection <host> -Port <port>
+			fping -r 0 -ag <address-with-mask> 2>/dev/null
+		Interfaces
+			ipconfig /all
+			netsh interface ip show config
+			Get-NetAdapter
+				Enable-NetAdapter <Adapter>
+				Disable-NetAdapter <adapter>
+			ncpa.cpl
+			ifconfig
+			ethtool <interface>
+				ethtool -S <interface>
+		Transmission
+			netcat -l <port>
+				netcat <address> <port>
+			telnet <address> <port>
+		IP
+			ipconfig /release
+			ipconfig /renew
+			New-NetIPAddress -InterfaceAlias <interface-name> -IPAddress <ip-address> -DefaultGateway <gateway-address>
+			netsh interface ip set address name=<interface-name> static <ip-address> <subnet-mask> <gateway-address>
+				interface ip set address name="Local Area Connection" static 192.168.10.42 255.255.255.0 192.168.1.1
+			ip address
+				ip address add <new-ip-address> dev <device-name>
+				ip address del <existing-ip-address> dev <device-name>
+				ip address change <new-ip-address> dev <device-name>
+				ip address replace <new-ip-address> dev <device-name>
+			hostname -I
+		Ports
+			netstat -anb
+			ss -t -a
+		DNS
+			Search
+				whois <address>
+				dig <address>
+				nslookup <address>
+					nslookup <address> <source-DNS>
+				host <address>
+			Configuration
+				ipconfig /flushdns
+				Set-DNSClientServerAddress –InterfaceAlias <interface-name> –ServerAddresses <dns-address1>,<dns-address2>
+				ip route add <network-address> via <gateway-address>
+					ip route add 0.0.0.0/0 via 8.8.8.8
+				ip route del <network-address> via <gateway-address>
+					ip route del 0.0.0.0/0 via 8.8.8.8
+			Information
+				ip route
+				hostname
+				getmac
+				arp -a
+	Database
+		SQL Server
+			sqlcmd
+				sqlcmd 
+-S <host-name>\<instance-name>
+-U <username> -P <password>
+					sqlcmd -S <host-name>\<instance-name> -i <script-sql-file> -o <output-file> -I
+				sqlcmd -Q <query> -o <output-file>
+					sqlcmd -Q "SELECT * FROM AdventureWorks2012.Person.Person" -o MyOutput.txt
+	Development
+		Versioning
+			git
+				git pull <repository> <branch>
+				git remote
+					git remote add <repository> <address>
+					git remote remove <repository>
+				git push <repository> <branch>
+				git checkout
+					git checkout -b <new-branch-name>
+					git checkout <branch>
+					git checkout <commit-hash>
+				git reset --hard
+				git clean -xdf
+				git commit -m <message>
+				git rm <path>
+				git ls-tree -r <branch>
+				git add <path>
+				git rm
+					git rm --cached
+				git clone <address>
+				git init
+				git log
+					git log --stat
+				git fetch
+					git fetch --all
+				git diff
+					git diff --cached
+					git diff <first-tag> <second-tag> --stat
+				git tag -m <message> <tag-name>
+				git revert -n <commit-hash>
+				git remote set-url origin git@github.com:<username>/<repo-name>.git
+			svn
+				svn checkout <address>
+				svn add <path>
+				svn status
+				svn log
+				svn export <address>
+				svn commit -m <message>
+		Package Manager
+			apt
+				apt install <package-list>
+				apt remove <package-list>
+				sudo apt-get purge <package-list>
+				apt update
+					apt update -qq
+				apt upgrade
+				apt search <package-name>
+				apt list
+					apt list --installed
+			chocolatey
+				Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+				choco install <package-list>
+				choco uninstall <package-list>
+				choco search <package-name>
+				choco list
+					choco list --local-only
+			Features
+				Add-WindowsCapability -Online -Name <feature-name>
+				Install-WindowsFeature <feature-name>
+				Information
+					Get-Module -ListAvailable
+					Get-WindowsFeature 
+					Get-WindowsCapability -Online | ? Name -like <feature-name>
+			npm
+				npm install -g <package-name>
+				npm uninstall <package-name>
+				npm list
+				npm search
+		Build Essentials
+			C/C++
+				Code Analyzer
+					clang-tidy
+						run-clang-tidy <source-dir> -p <compilation-database-path> -fix
+						run-clang-tidy <source-dir> -checks='-*,<clang-tidy-check>' -p <compilation-database-path> -fix
+					valgrind
+						valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=<file> --executable <executable-name>
+				Formatting
+					clang-format
+						find <path> -regex <regex-filter> -exec clang-format style=file -i {} \;
+							find . -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format -style=file -i {} \;
+							find . -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format --dry-run -Werror {} \;
+					cmake-format
+						cmake-format -i <file>
+						find <path> -name <name-filter> -exec cmake-format -i {} \;
+							find . \( -name '*.cmake' -o -name 'CMakeLists.txt' \) -exec cmake-format -i {} \;
+				Debug
+					 gdb
+						gdb "example.exe"
+							run
+							continue
+							watch <var-name>
+							step
+							next
+							print <var-name>
+							break
+								gdb break <function-name>
+									break <function-name> <condition>
+										break "my_func" if i >= ARRAYSIZE
+								break <file>:<line-number>
+				Compilation
+					cmake
+						cmake <source-dir> -B <build-dir> -DCMAKE_BUILD_TYPE=<build-type
+						cmake --build <build-dir> --target <target> --config <build-type>
+					make
+						make clean
+						make <target>
+			Typescript
+				ng
+					ng n <project-name> --directory <directory-name> [--minimal] 
+					ng g c <component-name>
+					ng g class <class-name>
+					ng g service <service-name>
+					ng g m <module-name> --routing
+					ng b --prod
+					ng s --prod
+					ng t --code-coverage
+			C#
+				dotnet
+					dotnet new <project-type> --name <project-name>
+						dotnet new sln --name <solution-name>
+						dotnet new classlib --name <project-name>
+						dotnet new webapi --name <project-name>
+					dotnet restore
+					dotnet sln add <project-path>
+					dotnet publish -c <build-type> -r <arch-type> <project-name>.csproj
+					Entity Framework
+						dotnet ef migrations add <migration-name> --project <project-name>
+						dotnet ef database update --project <project-name>
+						dotnet ef migrations script --project <project-name> --output <output-file> -i
+
+Captions
